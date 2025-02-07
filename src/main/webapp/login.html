@@ -48,7 +48,7 @@ button {
 		<h2>Login</h2>
 
 		<!-- 이메일 입력 필드 -->
-    	<input type="text" id="id" placeholder="이메일 주소" required><br>
+    	<input type="text" id="email" placeholder="이메일 주소" required><br>
 
 		<!-- 비밀번호 입력 필드 -->
 		<input type="password" id="pw" placeholder="비밀번호" required><br>
@@ -68,10 +68,10 @@ button {
 	<script>
 		function login() {
 			// 1. 사용자가 입력한 아이디와 비밀번호 값을 가져옴
-			var id = document.getElementById("id").value;
+			var email = document.getElementById("email").value;
 			var pw = document.getElementById("pw").value;
 			// 2. 입력 값이 비어 있는 경우, 경고 메시지를 표시하고 함수 종료
-			if (id === "" || pw === "") {
+			if (email === "" || pw === "") {
 				document.getElementById("loginResult").innerText = "아이디와 비밀번호를 입력하세요.";
 				return; // 이후 코드 실행하지 않음
 			}
@@ -92,7 +92,7 @@ button {
 			    }
 			};
 			// 8. AJAX 요청 설정 (POST 방식으로 서버의 "company?command=login"에 전송)
-			xhttp.open("POST", "login?command=login&id=" + id + "&pw=" + pw);
+			xhttp.open("POST", "login?command=login&email=" + email + "&pw=" + pw);
 			xhttp.send();
 		}
 	</script>

@@ -8,7 +8,7 @@ import util.DBUtil;
 
 public class UserDAO {
 	
-	public static boolean getUser(String id, String pw) throws Exception {// 로그인
+	public static boolean getUser(String email, String pw) throws Exception {// 로그인
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -17,8 +17,8 @@ public class UserDAO {
 		
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("SELECT id FROM user WHERE id = ? AND pw = ?");
-			pstmt.setString(1, id);
+			pstmt = con.prepareStatement("SELECT email FROM user WHERE email = ? AND pw = ?");
+			pstmt.setString(1, email);
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
 			
@@ -60,15 +60,15 @@ public class UserDAO {
 	    return false;
 	}
 	
-	public static boolean confirmUser(String id) throws Exception {// 비밀번호찾기시 id 존재 여부 확인
+	public static boolean confirmUser(String email) throws Exception {// 비밀번호찾기시 email 존재 여부 확인
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("select id from user where id = ?");
+			pstmt = con.prepareStatement("select email from user where id = ?");
 			
-			pstmt.setString(1, id);
+			pstmt.setString(1, email);
 			
 			if(pstmt.executeUpdate() != 0) {
 				return true;

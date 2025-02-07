@@ -24,14 +24,12 @@ public class UserController extends HttpServlet {
 		
 		else if (command.equals("login")) {// 로그인
 			try {
-				String id = request.getParameter("id");
+				String email = request.getParameter("email");
 				String pw = request.getParameter("pw");
 				
-				boolean check = UserDAO.getUser(id, pw);
+				boolean check = UserDAO.getUser(email, pw);
 				
 				if (check == true) {
-					Cookie idCookie = new Cookie("idkey", id);
-					response.addCookie(idCookie);
 					response.getWriter().write("success");
 				}
 				else {
@@ -45,7 +43,7 @@ public class UserController extends HttpServlet {
 		
 		else if (command.equals("registerUser")) {
 		    try {
-		        String id = request.getParameter("id");
+		        String email = request.getParameter("email");
 		        String pw = request.getParameter("pw");
 		        String name = request.getParameter("name");
 		        String phone_number = request.getParameter("phone_number");
@@ -54,7 +52,7 @@ public class UserController extends HttpServlet {
 		        String pw_answer = request.getParameter("pw_answer");
 
 		        // 이메일 형식 체크
-		        if (!id.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+		        if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
 		            response.setContentType("text/html;charset=UTF-8");
 		            PrintWriter out = response.getWriter();
 		            out.println("<script>alert('올바른 이메일 형식이 아닙니다'); history.back();</script>");
@@ -62,7 +60,7 @@ public class UserController extends HttpServlet {
 		            return;
 		        }
 
-		        boolean success = UserDAO.addUser(id, pw, name, phone_number, grade, pw_question, pw_answer);
+		        boolean success = UserDAO.addUser(email, pw, name, phone_number, grade, pw_question, pw_answer);
 		        
 		        if (success) {
 		            response.sendRedirect("login.html");
