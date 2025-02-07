@@ -47,7 +47,9 @@ public class UserController extends HttpServlet {
 		    try {
 		        String id = request.getParameter("id");
 		        String pw = request.getParameter("pw");
-		        String grade = "user"; // 기본 등급
+		        String name = request.getParameter("name");
+		        String phone_number = request.getParameter("phone_number");
+		        String grade = "user";
 		        String pw_question = request.getParameter("pw_question");
 		        String pw_answer = request.getParameter("pw_answer");
 
@@ -60,7 +62,7 @@ public class UserController extends HttpServlet {
 		            return;
 		        }
 
-		        boolean success = UserDAO.addUser(id, pw, grade, pw_question, pw_answer);
+		        boolean success = UserDAO.addUser(id, pw, name, phone_number, grade, pw_question, pw_answer);
 		        
 		        if (success) {
 		            response.sendRedirect("login.html");

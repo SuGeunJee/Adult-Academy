@@ -126,6 +126,16 @@
         text-align: left;
         display: none;
     }
+    
+    #phoneError {
+    color: #f44336;
+    font-size: 12px;
+    margin-top: -5px;
+    margin-bottom: 5px;
+    text-align: left;
+    display: none;
+	}
+	
 </style>
 
 </head>
@@ -138,6 +148,11 @@
         <input type="email" name="id" id="email" placeholder="이메일 주소" required>
         <div id="emailError">올바른 이메일 형식이 아닙니다.</div>
         
+        <input type="text" name="name" placeholder="이름" required>
+        
+        <input type="tel" name="phone_number" id="phone" placeholder="전화번호 (예: 010-1234-5678)" required>
+        <div id="phoneError">올바른 전화번호 형식이 아닙니다.</div>
+
         <input type="password" name="pw" placeholder="비밀번호" required>
 
         <div class="question-container">
@@ -163,21 +178,35 @@
 </div>
 
 <script>
-    function validateForm() {
-        const email = document.getElementById('email').value;
-        const emailError = document.getElementById('emailError');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        if (!emailRegex.test(email)) {
-            emailError.style.display = 'block';
-            return false;
-        }
-        emailError.style.display = 'none';
-        return true;
-    }
+	function validateForm() {
+	    const email = document.getElementById('email').value;
+	    const emailError = document.getElementById('emailError');
+	    const phone = document.getElementById('phone').value;
+	    const phoneError = document.getElementById('phoneError');
+	    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	    const phoneRegex = /^010-[0-9]{3,4}-[0-9]{4}$/;
+	    
+	    let isValid = true;
+	    
+	    if (!emailRegex.test(email)) {
+	        emailError.style.display = 'block';
+	        isValid = false;
+	    } else {
+	        emailError.style.display = 'none';
+	    }
+	    
+	    if (!phoneRegex.test(phone)) {
+	        phoneError.style.display = 'block';
+	        isValid = false;
+	    } else {
+	        phoneError.style.display = 'none';
+	    }
+	    
+	    return isValid;
+	}
 
     function goBack() {
-        history.back(); // 이전 페이지로 이동
+        history.back();
     }
 </script>
 

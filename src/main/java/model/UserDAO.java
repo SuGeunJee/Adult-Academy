@@ -33,29 +33,31 @@ public class UserDAO {
 		return userId;
 	}
 	
-	public static boolean addUser(String id, String pw, String grade, String pw_question, String pw_answer) throws Exception {// 회원가입
-		Connection con = null;	
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?, ?)");
+	public static boolean addUser(String email, String pw, String name, String phone_number, String grade, String pw_question, String pw_answer) throws Exception {
+	    Connection con = null;	
+	    PreparedStatement pstmt = null;
+	    
+	    try {
+	        con = DBUtil.getConnection();
+	        pstmt = con.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?)");
 	       
-			pstmt.setString(1, id);
+	        pstmt.setString(1, email);
 	        pstmt.setString(2, pw);
-	        pstmt.setString(3, grade);
-	        pstmt.setString(4, pw_question);
-	        pstmt.setString(5, pw_answer);
+	        pstmt.setString(3, name);
+	        pstmt.setString(4, phone_number);
+	        pstmt.setString(5, grade);
+	        pstmt.setString(6, pw_question);
+	        pstmt.setString(7, pw_answer);
 	        
-			if(pstmt.executeUpdate() != 0) {
-				return true;
-			}
-			
-		} finally {
-			DBUtil.close(con, pstmt);
-		}
-		
-		return false;
+	        if(pstmt.executeUpdate() != 0) {
+	            return true;
+	        }
+	        
+	    } finally {
+	        DBUtil.close(con, pstmt);
+	    }
+	    
+	    return false;
 	}
 	
 	public static boolean confirmUser(String id) throws Exception {// 비밀번호찾기시 id 존재 여부 확인
