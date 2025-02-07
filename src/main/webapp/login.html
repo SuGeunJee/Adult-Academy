@@ -41,7 +41,7 @@
             background-color: #008CBA; /* 파란색 */
             color: white;
         }
-    </styl
+    </style>
 </head>
 <body>
 
@@ -49,7 +49,7 @@
     <h2>Login</h2>
     
     <!-- 아이디 입력 필드 -->
-    <input type="text" id="id" placeholder="아이디" required><br>
+    <input type="text" id="id" placeholder="이메일 주소" required><br>
     
     <!-- 비밀번호 입력 필드 -->
     <input type="password" id="pw" placeholder="비밀번호" required><br>
@@ -96,7 +96,7 @@
         };
 
         // 8. AJAX 요청 설정 (POST 방식으로 서버의 "company?command=login"에 전송)
-        xhttp.open("POST", "company?command=login");
+        xhttp.open("POST", "login?command=login&id="+id+"&pw="+pw);
         xhttp.send();
 
     }

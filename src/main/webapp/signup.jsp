@@ -56,7 +56,6 @@
         color: white;
     }
 
-    /* 질문 선택 UI */
     .question-container {
         text-align: left;
         margin: 15px 0;
@@ -111,12 +110,22 @@
         color: transparent;
         transition: all 0.2s;
     }
-
+    
+	/* 질문 선택 UI */
     .question-box input:checked + label::before {
         background-color: white;
         color: #4CAF50;
     }
 
+    /* 이메일 에러 메시지를 위한 스타일 */
+    #emailError {
+        color: #f44336;
+        font-size: 12px;
+        margin-top: -5px;
+        margin-bottom: 5px;
+        text-align: left;
+        display: none;
+    }
 </style>
 
 </head>
@@ -124,9 +133,12 @@
 
 <div class="container">
     <h2>회원가입</h2>
-    <form method="post" action="register.jsp">
-        <input type="text" name="id" placeholder="아이디" required><br>
-        <input type="password" name="pw" placeholder="비밀번호" required><br>
+    <form method="post" action="login" onsubmit="return validateForm()">
+        <input type="hidden" name="command" value="registerUser">
+        <input type="email" name="id" id="email" placeholder="이메일 주소" required>
+        <div id="emailError">올바른 이메일 형식이 아닙니다.</div>
+        
+        <input type="password" name="pw" placeholder="비밀번호" required>
 
         <div class="question-container">
             <p>비밀번호 찾기 질문을 선택하세요:</p>
@@ -151,6 +163,19 @@
 </div>
 
 <script>
+    function validateForm() {
+        const email = document.getElementById('email').value;
+        const emailError = document.getElementById('emailError');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (!emailRegex.test(email)) {
+            emailError.style.display = 'block';
+            return false;
+        }
+        emailError.style.display = 'none';
+        return true;
+    }
+
     function goBack() {
         history.back(); // 이전 페이지로 이동
     }
