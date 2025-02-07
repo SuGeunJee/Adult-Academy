@@ -9,6 +9,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.UserDAO;
 
 @WebServlet("/login")
@@ -28,6 +29,9 @@ public class UserController extends HttpServlet {
 			try {
 				String email = request.getParameter("email");
 				String pw = request.getParameter("pw");
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("email", email);
 				
 				boolean check = UserDAO.getUser(email, pw);
 				
@@ -79,10 +83,6 @@ public class UserController extends HttpServlet {
 		        out.println("<script>alert('시스템 오류가 발생했습니다'); history.back();</script>");
 		        out.close();
 		    }
-		}
-		
-		else if (command.equals("signup")) {// 회원가입
-			response.sendRedirect("signup.jsp");// r
 		}
 		
 		else if (command.equals("searchpw")) {// 비밀번호 찾기
