@@ -136,6 +136,15 @@
     display: none;
 	}
 	
+	.error-message {
+	    color: #f44336;
+	    font-size: 12px;
+	    margin-top: -5px;
+	    margin-bottom: 5px;
+	    text-align: left;
+	    display: none;
+		}
+	
 </style>
 
 </head>
@@ -152,9 +161,11 @@
         
         <input type="tel" name="phone_number" id="phone" placeholder="전화번호 (예: 010-1234-5678)" required>
         <div id="phoneError">올바른 전화번호 형식이 아닙니다.</div>
-
-        <input type="password" name="pw" placeholder="비밀번호" required>
-
+		
+		<input type="password" name="pw" id="password" placeholder="비밀번호" required>
+		<input type="password" id="confirmPassword" placeholder="비밀번호 확인" required>
+		<div id="passwordError" class="error-message">비밀번호가 일치하지 않습니다.</div>
+		
         <div class="question-container">
             <p>비밀번호 찾기 질문을 선택하세요:</p>
             <div class="question-box">
@@ -183,6 +194,10 @@
 	    const emailError = document.getElementById('emailError');
 	    const phone = document.getElementById('phone').value;
 	    const phoneError = document.getElementById('phoneError');
+	    const password = document.getElementById('password').value;
+	    const confirmPassword = document.getElementById('confirmPassword').value;
+	    const passwordError = document.getElementById('passwordError');
+	    
 	    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	    const phoneRegex = /^010-[0-9]{3,4}-[0-9]{4}$/;
 	    
@@ -200,6 +215,13 @@
 	        isValid = false;
 	    } else {
 	        phoneError.style.display = 'none';
+	    }
+	    
+	    if(password !== confirmPassword) {
+	        passwordError.style.display = 'block';
+	        isValid = false;
+	    } else {
+	        passwordError.style.display = 'none';
 	    }
 	    
 	    return isValid;

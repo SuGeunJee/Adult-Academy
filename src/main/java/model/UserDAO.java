@@ -83,4 +83,64 @@ public class UserDAO {
 		
 		return false;
 	}
+	
+	public static String findEmail(String name, String phoneNumber) throws Exception {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    
+	    try {
+	        con = DBUtil.getConnection();
+	        pstmt = con.prepareStatement("SELECT email FROM user WHERE name = ? AND phone_number = ?");
+	        pstmt.setString(1, name);
+	        pstmt.setString(2, phoneNumber);
+	        rs = pstmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            return rs.getString("email");
+	        }
+	    } finally {
+	        DBUtil.close(con, pstmt, rs);
+	    }
+	    return null;
+	}
+
+	public static boolean verifyUser(String email, String name, String phoneNumber) throws Exception {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    
+	    try {
+	        con = DBUtil.getConnection();
+	        pstmt = con.prepareStatement("SELECT * FROM user WHERE email = ? AND name = ? AND phone_number = ?");
+	        pstmt.setString(1, email);
+	        pstmt.setString(2, name);
+	        pstmt.setString(3, phoneNumber);
+	        rs = pstmt.executeQuery();
+	        
+	        return rs.next();
+	    } finally {
+	        DBUtil.close(con, pstmt, rs);
+	    }
+	}
+	
+	public static boolean updatePassword(String email, String newPassword) throws Exception {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    
+	    try {
+	        con = DBUtil.getConnection();
+	        pstmt = con.prepareStatement("UPDATE user SET pw = ? WHERE email = ?");
+	        
+	        // BCrypt를 사용하여 새 비밀번호 해시화
+	        String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+	        
+	        pstmt.setString(1, hashedPassword);
+	        pstmt.setString(2, email);
+	        
+	        return pstmt.executeUpdate() > 0;
+	    } finally {
+	        DBUtil.close(con, pstmt);
+	    }
+	}
 }
