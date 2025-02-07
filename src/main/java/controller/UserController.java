@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,16 +27,15 @@ public class UserController extends HttpServlet {
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");
 				
-				System.out.println(id);
 				boolean check = UserDAO.getUser(id, pw);
-				System.out.println(check);
 				
-				if (check == true) request.getRequestDispatcher("main.jsp").forward(request, response);// f
+				if (check == true) {
+					Cookie idCookie = new Cookie("idkey", id);
+					response.addCookie(idCookie);
+					response.getWriter().write("success");
+				}
 				else {
-					response.setContentType("text/html;charset=UTF-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script>alert('로그인 오류'); location.href='login';</script>");// id랑 pw 유지하지 않으므로 r
-					out.close();
+					response.getWriter().write("fail");
 				}
 				
 			} catch (Exception e) {
