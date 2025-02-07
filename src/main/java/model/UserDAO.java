@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 
 import util.DBUtil;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class UserDAO {
 	
 	public static boolean getUser(String email, String pw) throws Exception {// 로그인
@@ -17,13 +19,13 @@ public class UserDAO {
 		
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("SELECT email FROM user WHERE email = ? AND pw = ?");
+			pstmt = con.prepareStatement("SELECT pw FROM user WHERE email = ?");
 			pstmt.setString(1, email);
-			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				userId = true;
+				String hashedPw = rs.getString("pw");
+	            return BCrypt.checkpw(pw, hashedPw);
 			}
 			
 		} finally {
@@ -41,8 +43,9 @@ public class UserDAO {
 	        con = DBUtil.getConnection();
 	        pstmt = con.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?)");
 	       
+	        System.out.println("dao:"+email);
 	        pstmt.setString(1, email);
-	        pstmt.setString(2, pw);
+	        pstmt.setString(2, BCrypt.hashpw(pw, BCrypt.gensalt()));
 	        pstmt.setString(3, name);
 	        pstmt.setString(4, phone_number);
 	        pstmt.setString(5, grade);

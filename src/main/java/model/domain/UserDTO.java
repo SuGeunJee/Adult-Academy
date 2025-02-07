@@ -12,8 +12,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class UserDTO {
-	String id;
+	String email;
     String pw;
+    String name;
+    String phone_number;
     enum grade {
     	admin, user
     }

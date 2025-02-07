@@ -145,7 +145,7 @@
     <h2>회원가입</h2>
     <form method="post" action="login" onsubmit="return validateForm()">
         <input type="hidden" name="command" value="registerUser">
-        <input type="email" name="id" id="email" placeholder="이메일 주소" required>
+        <input type="email" name="email" id="email" placeholder="이메일 주소" required>
         <div id="emailError">올바른 이메일 형식이 아닙니다.</div>
         
         <input type="text" name="name" placeholder="이름" required>
