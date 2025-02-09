@@ -99,6 +99,71 @@ src/
 
 # ❗ Troubleshooting
 
-## Issue 1: Session Implementation
+## Issue 1 : /step04_reviewTest/login 경로로 서버가 실행되는 현상
+### 🚨 문제 상황
+프로젝트명이 Adult-Academy임에도 불구하고 서버가 계속 /step04_reviewTest/login 경로로 실행됨
+
+### 🔍 문제 파악
+Maven 설정(pom.xml)의 artifactId가 step04_reviewTest로 되어있음 <br>
+실제 프로젝트 폴더명은 Adult-Academy <br> 
+이로 인해 서버 배포 시 Context Path가 step04_reviewTest로 설정됨 <br>
+
+하지만 artifactId를 Adult-Academy로 바꾸어 주고, 프로젝트를 재빌드하여도 상황이 해결되지 않음
+
+### pom.xml
+```
+<!-- Before -->
+<artifactId>step04_reviewTest</artifactId>
+
+<!-- After -->
+<artifactId>Adult-Academy</artifactId>
+
+```
+<img width="1149" alt="123123" src="https://github.com/user-attachments/assets/fc16e011-492d-4479-846c-8c8c838a42d7" />
+
+
+### ✅ 해결 방법
+
+1. Tomcat 서버의 작업 디렉토리 검사 <br>
+
+- {workspace}\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost <br>
+- 폴더에서 Tomcat의 work 디렉토리에 이전 Context Path 관련 캐시가 남아있는 것을 확인
+
+<img width="526" alt="image" src="https://github.com/user-attachments/assets/6e1288eb-c663-4dde-b30a-8bdab8fc3bcc" /> <br><br>
+
+2. 서버 설정 파일 확인 <br>
+
+- {workspace}\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\conf\server.xml <br>
+- 파일을 확인해보니, docBase가 step04_reviewTest로 되어 있는 것을 확인 <br>
+
+```
+<Context docBase="C:\01.lab\04.Web\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\01.lab\04.Web\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\step04_reviewTest" path="/step04_reviewTest" reloadable="true" source="org.eclipse.jst.jee.server:step04_reviewTest">
+```
+<br>
+
+3. 캐시 및 설정 초기화
+
+- STS의 Servers 뷰에서 Tomcat 서버를 Clean Tomcat Work Directory 명령으로 작업 디렉토리를 정리한 후, 프로젝트를 빌드하면 정상적으로 실행됨을 확인할 수 있음
+
+<img width="544" alt="스크린샷 2025-02-10 000707" src="https://github.com/user-attachments/assets/84d97a07-a94b-4e62-b675-692abb87e5e5" /> <br>
+
+<img width="1159" alt="456456" src="https://github.com/user-attachments/assets/ee6c808b-d51c-4bc7-96bf-52aa0eda6a39" />
+
+### 🎯 결과
+
+- `http://localhost:8080/Adult-Academy/login.html`로 정상 접속
+- 프로젝트의 Context Path 가 의도한 대로 변경됨
+
+### 💡 학습 포인트
+
+- Tomcat 서버는 컨텍스트 설정을 캐싱하여 관리함 <br>
+- Maven 설정 변경 시 서버의 작업 디렉토리와 설정 파일도 함께 확인 필요 <br>
+- 단순 재시작이 아닌 작업 디렉토리 정리가 필요한 경우가 있음 <br>
+- Web Project Settings의 Context Root와 Maven의 artifactId 일치가 중요 <br>
+- Context Path 변경 시 브라우저 캐시 삭제 필요할 수 있음 <br>
+
+
+
+## Issue 2: Session Implementation
 문제: 세션 기반 인증이 페이지 간 유지되지 않는 문제 발생
 해결: UserController에서 세션 관리 로직을 개선하고 모든 보안이 필요한 페이지에 세션 체크 로직 추가
