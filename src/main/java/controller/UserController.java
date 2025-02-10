@@ -17,7 +17,7 @@ public class UserController extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		String command = request.getParameter("command");// 로그인인지 회원가입인지 비밀번호찾기인지 구분
+		String command = request.getParameter("command");
 		
 		System.out.println(command);
 		
@@ -97,6 +97,7 @@ public class UserController extends HttpServlet {
 		    
 		    try {
 		        String email = UserDAO.findEmail(name, phoneNumber);
+		        
 		        if (email != null) {
 		            response.setContentType("text/html;charset=UTF-8");
 		            PrintWriter out = response.getWriter();
@@ -170,11 +171,5 @@ public class UserController extends HttpServlet {
 		        e.printStackTrace();
 		    }
 		}
-		
-		else if (command.equals("searchpw")) {// 비밀번호 찾기
-			response.sendRedirect("searchpw.jsp");// r
-		}
-		
 	}
-
 }

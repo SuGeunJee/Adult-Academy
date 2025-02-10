@@ -74,7 +74,8 @@ textarea, select, input {
 	</div>
 
 	<!-- 질문 작성 -->
-	<form action="BoardServlet" method="post">
+	<form action="board" method="post">
+	    <input type="hidden" name="action" value="add">
 		<input type="hidden" name="type" value="qna"> <!-- Q&A 글임을 표시 -->
 		<input type="hidden" name="category" value="<%= category %>">
 		<select name="category">
@@ -99,12 +100,12 @@ textarea, select, input {
 			Board post = qnaPosts.get(i);
 		%>
 		<div class="post-item">
-			<strong><%=post.getTitle()%></strong> (작성자:
-			<%=post.getAuthor()%>)
-			<p><%=post.getContent()%></p>
-			<form action="BoardServlet" method="post" style="display: inline;">
-				<input type="hidden" name="action" value="delete"> <input
-					type="hidden" name="title" value="<%=post.getTitle()%>">
+			<strong><%=post.getAuthor()%></strong> (작성자:
+			<%=post.getContent()%>)
+			<p><%=post.getTitle()%></p>
+			<form action="board" method="post" style="display: inline;">
+				<input type="hidden" name="action" value="delete">
+				<input type="hidden" name="title" value="<%=post.getAuthor()%>">
 				<input type="hidden" name="category" value="<%=category%>">
 				<input type="hidden" name="type" value="qna">
 				<button type="submit">삭제</button>

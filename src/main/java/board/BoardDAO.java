@@ -126,7 +126,7 @@ public class BoardDAO {
 
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("SELECT title, content, email FROM qna_posts WHERE category = ?");
+			pstmt = con.prepareStatement("SELECT title, content, email, category FROM qna_posts WHERE category = ?");
 			pstmt.setString(1, category);
 			rs = pstmt.executeQuery();
 
@@ -145,10 +145,6 @@ public class BoardDAO {
 
 	// 일반 게시글 삭제
 	public boolean deletePost(String category, String title) throws Exception {
-		// posts.computeIfAbsent(category, k -> new ArrayList<>()).add(new Board(title,
-		// content, email));
-		
-		System.out.printf(category, title);
 
 		Connection con = null;
 		PreparedStatement pstmt = null;

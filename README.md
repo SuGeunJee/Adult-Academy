@@ -8,7 +8,10 @@
 4. [Tech Stack](#-tech-stack)
 5. [Project Structure](#-project-structure)
 6. [Database Schema](#-database-schema)
-7. [Troubleshooting](#-troubleshooting)
+7. [System Architecture](#%EF%B8%8F-system-architecture)
+8. [Troubleshooting](#-troubleshooting)
+9. [Future plans](#-future-plans)
+10. [Review](#%EF%B8%8F-review)
 
 # 🎯 Project Overview
 사용자들이 일상생활에서 유용한 팁을 공유하고 소통할 수 있는 웹 커뮤니티 플랫폼입니다. 유튜브, 쿠팡, 당근마켓, 카카오톡 등 다양한 플랫폼 활용 팁을 카테고리별로 공유하고 토론할 수 있습니다.
@@ -20,16 +23,15 @@
 
 # ✨ Features
 - **사용자 인증**
-  - 이메일 기반 회원가입/로그인
+  - 이메일 세션 기반 회원가입/로그인
   - BCrypt를 활용한 안전한 비밀번호 암호화
   - 비밀번호 찾기/재설정 기능
 
 - **카테고리별 게시판**
-  ![게시판 스크린샷](image_url)
   - 유튜브 활용 팁
-  - 쿠팡 쇼핑 노하우
+  - 쿠팡 쇼핑 팁
   - 당근마켓 거래 팁
-  - 카카오톡 활용법
+  - 카카오톡 활용 팁
   - 친목 게시판
   - Q&A 게시판
 
@@ -41,24 +43,16 @@
 
 # 🛠 Tech Stack
 
-## Backend
-![Java](https://img.shields.io/badge/Java%2021-007396?style=for-the-badge&logo=java&logoColor=white)
-![Jakarta EE](https://img.shields.io/badge/Jakarta%20EE-D22128?style=for-the-badge&logo=jakarta&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+|  **분류**   |   **기술 스택**   |
+|--------------|-------------|
+| **언어**      | ![Java](https://img.shields.io/badge/Java%2017-007396?style=for-the-badge&logo=java&logoColor=white) ![Jakarta EE](https://img.shields.io/badge/Jakarta%20-D22128?style=for-the-badge&logo=jakarta&logoColor=white)        |
+| **데이터베이스** | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)   |
+| **보안**      | ![BCrypt](https://img.shields.io/badge/BCrypt-2A5BBB?style=for-the-badge&logo=lock&logoColor=white) ![Session Based Auth](https://img.shields.io/badge/Session%20Based%20Auth-000000?style=for-the-badge&logo=session&logoColor=white)                                                          |
+| **빌드 도구**   | ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)                                                        |
+| **개발 환경**   | ![STS](https://img.shields.io/badge/Spring%20Tool%20Suite-6DB33F?style=for-the-badge&logo=spring&logoColor=white) ![DBeaver](https://img.shields.io/badge/DBeaver-4D4D4D?style=for-the-badge&logo=dbeaver&logoColor=white) |
+| **협업툴**     | ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white) ![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) |
+| **서버**  | ![Apache Tomcat](https://img.shields.io/badge/Apache%20Tomcat%2010.1-F8DC75?style=for-the-badge&logo=apache-tomcat&logoColor=black) |
 
-## Security
-![BCrypt](https://img.shields.io/badge/BCrypt-2A5BBB?style=for-the-badge&logo=lock&logoColor=white)
-![Session Based Auth](https://img.shields.io/badge/Session%20Based%20Auth-000000?style=for-the-badge&logo=session&logoColor=white)
-
-## Development Tools
-![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
-![STS](https://img.shields.io/badge/Spring%20Tool%20Suite-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
-![DBeaver](https://img.shields.io/badge/DBeaver-4D4D4D?style=for-the-badge&logo=dbeaver&logoColor=white)
-
-## Collaboration Tools
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
-![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
 
 # 📁 Project Structure
 ```plaintext
@@ -86,16 +80,48 @@ src/
 ```
 
 # 💾 Database Schema
+<img width="461" alt="image" src="https://github.com/user-attachments/assets/77b11dbb-77dd-4fc1-9fbc-e9ddbbb4e9fe" />
+
 ## Users Table
 | Column | Type | Description |
 |--------|------|-------------|
 | email | VARCHAR(50) | Primary Key |
-| pw | VARCHAR(100) | BCrypt Hashed Password |
+| pw | VARCHAR(64) | BCrypt Hashed Password |
 | name | VARCHAR(20) | User's Name |
 | phone_number | VARCHAR(15) | Contact Number |
 | grade | VARCHAR(10) | User Grade (admin/user) |
 | pw_question | VARCHAR(100) | Password Recovery Question |
 | pw_answer | VARCHAR(100) | Password Recovery Answer |
+
+## Board Posts Table (board_posts)
+| Column | Type | Description |
+|--------|------|-------------|
+| id | INT | Primary Key, Auto Increment |
+| email | VARCHAR(50) | Foreign Key (user.email) |
+| category | VARCHAR(50) | Post Category |
+| title | VARCHAR(255) | Post Title |
+| content | TEXT | Post Content |
+| created_at | TIMESTAMP | Creation Time, Default CURRENT_TIMESTAMP |
+
+## Q&A Posts Table (qna_posts)
+| Column | Type | Description |
+|--------|------|-------------|
+| id | INT | Primary Key, Auto Increment |
+| email | VARCHAR(50) | Foreign Key (user.email) |
+| category | VARCHAR(50) | Question Category |
+| title | VARCHAR(255) | Question Title |
+| content | TEXT | Question Content |
+| created_at | TIMESTAMP | Creation Time, Default CURRENT_TIMESTAMP |
+
+## Relationships
+- board_posts.email → user.email (CASCADE)
+- qna_posts.email → user.email (CASCADE)
+
+# 🏗️ System Architecture
+
+
+# 👀 Run Screen
+
 
 # ❗ Troubleshooting
 
@@ -162,8 +188,9 @@ Maven 설정(pom.xml)의 artifactId가 step04_reviewTest로 되어있음 <br>
 - Web Project Settings의 Context Root와 Maven의 artifactId 일치가 중요 <br>
 - Context Path 변경 시 브라우저 캐시 삭제 필요할 수 있음 <br>
 
+# 📈 Future plans
 
 
-## Issue 2: Session Implementation
-문제: 세션 기반 인증이 페이지 간 유지되지 않는 문제 발생
-해결: UserController에서 세션 관리 로직을 개선하고 모든 보안이 필요한 페이지에 세션 체크 로직 추가
+# ✍️ Review
+
+>>>>>>> 80ba7972b94d62f46ddd1990ba2bae9fcede0251
