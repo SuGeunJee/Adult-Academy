@@ -55,7 +55,7 @@ textarea {
 	<a href="index.jsp">홈으로</a>
 
 	<!-- 게시글 작성 -->
-	<form action="BoardServlet" method="post">
+	<form action="board" method="post">
 		<input type="hidden" name="category" value="friendship"> <input
 			type="text" name="title" placeholder="제목" required><br>
 		<textarea name="content" placeholder="내용을 입력하세요" required></textarea>
@@ -71,8 +71,9 @@ textarea {
 			Board post = posts.get(i);
 		%>
 		<div class="post-item">
-			<strong><%=post.getTitle()%></strong> (작성자:
-			<%=post.getAuthor()%>)
+			<h3>✍️제목 : <%= post.getAuthor() %>
+            <br>
+             (작성자 : <%= post.getContent() %>)</h3>
 			<p><%=post.getContent()%></p>
 			<!-- 댓글 작성 폼 -->
 			<form action="CommentServlet" method="post">
