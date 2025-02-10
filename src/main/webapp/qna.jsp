@@ -91,14 +91,24 @@ textarea, select, input {
 
 	<!-- 질문 목록 -->
 	<div class="content">
-		<h2>질문 목록 (<%= category %>)</h2>
+		<h2>
+			질문 목록 (<%=category%>)
+		</h2>
 		<%
-            for (int i = start; i < end; i++) {
-                Board post = qnaPosts.get(i);
-        %>
+		for (int i = start; i < end; i++) {
+			Board post = qnaPosts.get(i);
+		%>
 		<div class="post-item">
-			<strong><%= post.getTitle() %></strong> (작성자: <%= post.getAuthor() %>)
-			<p><%= post.getContent() %></p>
+			<strong><%=post.getTitle()%></strong> (작성자:
+			<%=post.getAuthor()%>)
+			<p><%=post.getContent()%></p>
+			<form action="BoardServlet" method="post" style="display: inline;">
+				<input type="hidden" name="action" value="delete"> <input
+					type="hidden" name="title" value="<%=post.getTitle()%>">
+				<input type="hidden" name="category" value="<%=category%>">
+				<input type="hidden" name="type" value="qna">
+				<button type="submit">삭제</button>
+			</form>
 		</div>
 		<% } %>
 
