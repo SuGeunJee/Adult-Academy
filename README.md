@@ -9,6 +9,8 @@
 5. [Project Structure](#-project-structure)
 6. [Database Schema](#-database-schema)
 7. [Troubleshooting](#-troubleshooting)
+8. [Future plans](#-future-plans)
+9. [Review](#%EF%B8%8F-review)
 
 # 🎯 Project Overview
 사용자들이 일상생활에서 유용한 팁을 공유하고 소통할 수 있는 웹 커뮤니티 플랫폼입니다. 유튜브, 쿠팡, 당근마켓, 카카오톡 등 다양한 플랫폼 활용 팁을 카테고리별로 공유하고 토론할 수 있습니다.
@@ -20,16 +22,15 @@
 
 # ✨ Features
 - **사용자 인증**
-  - 이메일 기반 회원가입/로그인
+  - 이메일 세션 기반 회원가입/로그인
   - BCrypt를 활용한 안전한 비밀번호 암호화
   - 비밀번호 찾기/재설정 기능
 
 - **카테고리별 게시판**
-  ![게시판 스크린샷](image_url)
   - 유튜브 활용 팁
-  - 쿠팡 쇼핑 노하우
+  - 쿠팡 쇼핑 팁
   - 당근마켓 거래 팁
-  - 카카오톡 활용법
+  - 카카오톡 활용 팁
   - 친목 게시판
   - Q&A 게시판
 
@@ -182,4 +183,9 @@ Maven 설정(pom.xml)의 artifactId가 step04_reviewTest로 되어있음 <br>
 - 단순 재시작이 아닌 작업 디렉토리 정리가 필요한 경우가 있음 <br>
 - Web Project Settings의 Context Root와 Maven의 artifactId 일치가 중요 <br>
 - Context Path 변경 시 브라우저 캐시 삭제 필요할 수 있음 <br>
+
+# 📈 Future plans
+
+
+# ✍️ Review
 
