@@ -98,7 +98,7 @@ public class BoardDAO {
 
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("SELECT title, content, email, category FROM board_posts WHERE category = ?");
+			pstmt = con.prepareStatement("SELECT email, title, content FROM board_posts WHERE category = ?");
 			pstmt.setString(1, category);
 			rs = pstmt.executeQuery();
 
@@ -126,7 +126,7 @@ public class BoardDAO {
 
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("SELECT title, content, email, category FROM qna_posts WHERE category = ?");
+			pstmt = con.prepareStatement("SELECT email, title, content FROM qna_posts WHERE category = ?");
 			pstmt.setString(1, category);
 			rs = pstmt.executeQuery();
 

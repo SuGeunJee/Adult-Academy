@@ -73,12 +73,11 @@ textarea {
 			Board post = posts.get(i);
 		%>
 		<div class="post-item">
-			<strong><%=post.getAuthor()%></strong> (작성자:
-			<%=post.getContent()%>)
-			<p><%=post.getTitle()%></p>
+			<strong><%=post.getTitle()%></strong> (작성자:<%=post.getAuthor()%>)
+			<p><%=post.getContent()%></p>
 			<form action="board" method="post" style="display: inline;">
 				<input type="hidden" name="action" value="delete">
-				<input type="hidden" name="title" value="<%=post.getAuthor()%>">
+				<input type="hidden" name="title" value="<%=post.getTitle()%>">
 				<input type="hidden" name="category" value="<%=category%>">
 				<button type="submit">삭제</button>
 			</form>
