@@ -8,9 +8,10 @@
 4. [Tech Stack](#-tech-stack)
 5. [Project Structure](#-project-structure)
 6. [Database Schema](#-database-schema)
-7. [Troubleshooting](#-troubleshooting)
-8. [Future plans](#-future-plans)
-9. [Review](#%EF%B8%8F-review)
+7. [System Architecture](#%EF%B8%8F-system-architecture)
+8. [Troubleshooting](#-troubleshooting)
+9. [Future plans](#-future-plans)
+10. [Review](#%EF%B8%8F-review)
 
 # 🎯 Project Overview
 사용자들이 일상생활에서 유용한 팁을 공유하고 소통할 수 있는 웹 커뮤니티 플랫폼입니다. 유튜브, 쿠팡, 당근마켓, 카카오톡 등 다양한 플랫폼 활용 팁을 카테고리별로 공유하고 토론할 수 있습니다.
@@ -115,6 +116,9 @@ src/
 ## Relationships
 - board_posts.email → user.email (CASCADE)
 - qna_posts.email → user.email (CASCADE)
+
+# 🏗️ System Architecture
+
 
 # 👀 Run Screen
 
