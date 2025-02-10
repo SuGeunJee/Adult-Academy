@@ -62,10 +62,12 @@ src/
 │   │   ├── board/
 │   │   │   ├── Board.java
 │   │   │   ├── BoardDAO.java
-│   │   │   └── BoardServlet.java
 │   │   ├── controller/
 │   │   │   └── UserController.java
+│   │   │   └── BoardController.java
 │   │   ├── model/
+│   │   │   │   └── domain/
+│   │   │   │   │    └── UserDTO.java
 │   │   │   └── UserDAO.java
 │   │   └── util/
 │   │       └── DBUtil.java
@@ -74,9 +76,11 @@ src/
 │       ├── friendship.jsp
 │       ├── index.jsp
 │       ├── login.html
-│       ├── main.jsp
 │       ├── qna.jsp
 │       └── signup.jsp
+│       └── findemail.jsp
+│       └── findpassword.jsp
+│       └── resetpassword.jsp
 ```
 
 # 💾 Database Schema
@@ -189,6 +193,20 @@ Maven 설정(pom.xml)의 artifactId가 step04_reviewTest로 되어있음 <br>
 - Context Path 변경 시 브라우저 캐시 삭제 필요할 수 있음 <br>
 
 # 📈 Future plans
+
+1. 현재 mysql db서버를 로컬에 설치해서 사용하는데 추후 db서버를 따로 추가할 계획임<br>
+
+2. 유저의 등급을 나타내는 grade 컬럼을 만들기는 했지만 사용하지 않아 현재 
+관리자와 일반 사용자 간에 차이가 없음. 관리자 게시글 제목에는 [공지]를 
+추가한다거나 빨간 글씨로 보이게 하는 등 차별점을 두고, 게시글의 삭제에 대한 
+권한에 차이를 둘 예정임<br>
+
+3. 현재 유튜브, 쿠팡, 당근마켓, 카카오톡, 친목 게시판의 게시글 데이터가 전부 
+한 테이블에 저장됨. 추후 데이터가 많아질 경우 카테고리별로 파티션을 
+나누거나 샤딩으로 CRUD 성능을 높일 계획임<br>
+
+4. qna 게시판에서 일반 사용자들이 쓴 각각의 질문 게시글에 관리자가 답변을
+ 달 수 있도록 할 예정임<br><br>
 
 
 # ✍️ Review
