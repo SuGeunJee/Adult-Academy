@@ -58,6 +58,7 @@ textarea {
 	<a href="index.jsp">홈으로</a>
 
 	<form action="BoardServlet" method="post">
+		<input type="hidden" name="action" value="add">
 		<input type="hidden" name="category" value="<%=category%>">
 		<input type="text" name="title" placeholder="제목" required><br>
 		<textarea name="content" placeholder="내용" required></textarea>
@@ -72,13 +73,13 @@ textarea {
 			Board post = posts.get(i);
 		%>
 		<div class="post-item">
-			<strong><%=post.getTitle()%></strong> (작성자:
-			<%=post.getAuthor()%>)
-			<p><%=post.getContent()%></p>
+			<strong><%=post.getAuthor()%></strong> (작성자:
+			<%=post.getContent()%>)
+			<p><%=post.getTitle()%></p>
 			<form action="BoardServlet" method="post" style="display: inline;">
 				<input type="hidden" name="action" value="delete"> <input
-					type="hidden" name="index" value="<%=i%>"> <input
-					type="hidden" name="category" value="<%=category%>">
+					type="hidden" name="title" value="<%=post.getAuthor()%>">
+				<input type="hidden" name="category" value="<%=category%>">
 				<button type="submit">삭제</button>
 			</form>
 		</div>

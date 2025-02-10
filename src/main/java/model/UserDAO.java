@@ -43,7 +43,6 @@ public class UserDAO {
 	        con = DBUtil.getConnection();
 	        pstmt = con.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?)");
 	       
-	        System.out.println("dao:"+email);
 	        pstmt.setString(1, email);
 	        pstmt.setString(2, BCrypt.hashpw(pw, BCrypt.gensalt()));
 	        pstmt.setString(3, name);
