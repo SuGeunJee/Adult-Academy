@@ -18,9 +18,7 @@ public class UserController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String command = request.getParameter("command");// 로그인인지 회원가입인지 비밀번호찾기인지 구분
-		
-		System.out.println(command);
-		
+				
 		if (command == null) {
 			response.sendRedirect("login.html");
 		} 

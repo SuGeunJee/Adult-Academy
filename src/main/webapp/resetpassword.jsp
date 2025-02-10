@@ -5,30 +5,37 @@
     <meta charset="UTF-8">
     <title>비밀번호 재설정</title>
     <style>
-        .container {
-            width: 300px;
-            margin: 50px auto;
-            text-align: center;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        button {
-            width: 100%;
-            padding: 8px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        
-    </style>
+	.container {
+	    width: 300px;
+	    margin: 50px auto;
+	    text-align: center;
+	}
+	input {
+	    width: 100%;
+	    padding: 8px;
+	    margin: 5px 0;
+	    border: 1px solid #ddd;
+	    border-radius: 5px;
+	}
+	button {
+	    width: 100%;
+	    padding: 8px;
+	    margin-top: 10px;
+	    border: none;
+	    border-radius: 5px;
+	    background-color: #4CAF50;
+	    color: white;
+	    cursor: pointer;
+	}
+	.error-message {
+	    color: #f44336;
+	    font-size: 12px;
+	    margin-top: -5px;
+	    margin-bottom: 5px;
+	    text-align: left;
+	    display: none;
+	}
+	</style>
 </head>
 <body>
     <div class="container">
