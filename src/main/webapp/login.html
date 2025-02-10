@@ -83,8 +83,8 @@ button {
 			// 3. XMLHttpRequest 객체 생성 (AJAX 요청을 보내기 위해 사용)
 			const xhttp = new XMLHttpRequest();
 			// 4. 서버 응답을 처리하는 이벤트 리스너 등록
-			xhttp.onreadystatechange = function() {	
-				if (this.readyState == 4 && this.status == 200) {
+				xhttp.onreadystatechange = function() {	
+					if (this.readyState == 4 && this.status == 200) {
 			        let response = this.responseText.trim(); // 서버에서 받은 응답을 정리
 
 			        if (response === "success") {
