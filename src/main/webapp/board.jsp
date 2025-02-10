@@ -4,6 +4,19 @@
 <%@ page import="board.Board, board.BoardDAO"%>
 
 <%
+	//세션에서 이메일 정보 가져오기
+	String userEmail = (String) session.getAttribute("email");
+	
+	//로그인 상태가 아니면 로그인 페이지로 리다이렉트
+	if (userEmail == null) {
+	     response.setContentType("text/html;charset=UTF-8");
+	     out.println("<script>");
+	     out.println("alert('로그인이 필요한 서비스입니다.');");
+	     out.println("location.href='login.html';");
+	     out.println("</script>");
+	     return;
+	 }
+
     // 카테고리 확인
     String category = request.getParameter("category");
     if (category == null) category = "youtube"; // 기본값
