@@ -122,9 +122,11 @@ src/
 - qna_posts.email → user.email (CASCADE)
 
 # 🏗️ System Architecture
+![flowchart2](https://github.com/user-attachments/assets/3539681e-a00f-4e2c-b37a-4123363f1f5f)
 
 
 # 👀 Run Screen
+![image](https://github.com/user-attachments/assets/57b7b856-617d-487f-ad68-35676bacb197)
 
 
 # ❗ Troubleshooting
@@ -211,4 +213,12 @@ Maven 설정(pom.xml)의 artifactId가 step04_reviewTest로 되어있음 <br>
 
 # ✍️ Review
 
->>>>>>> 80ba7972b94d62f46ddd1990ba2bae9fcede0251
+
+이번 프로젝트를 통해 MVC 패턴을 적용하여 Servlet과 JSP 기반의 웹페이지를 개발할 수 있었습니다. 이를 통해 클라이언트 요청이 컨트롤러(Servlet)를 거쳐 모델(DB)과 뷰(JSP)로 전달되는 흐름을 체계적으로 이해할 수 있었습니다.
+
+
+특히, 실제 웹페이지 운영을 고려하며 로그인, 회원가입, 메인 페이지, 게시판, 게시글 등록/삭제의 전체적인 흐름을 설계하고 구현하면서, 발생할 수 있는 다양한 예외 상황과 이를 해결하기 위한 세부적인 로직을 깊이 있게 고민할 수 있었습니다.
+
+
+또한, session을 활용하여 사용자 로그인 후 ID 값을 기반으로 클라이언트를 식별할 수 있도록 하였으며, 앞으로 더 확장된 기능과 최적화된 운영 환경을 구현해야할 필요성을 느낄 수 있었습니다.
+
